@@ -2,16 +2,14 @@ import json
 
 
 class Player:
-    def __init__(self, name, health, attack):
+    def __init__(self, name='', health=10, attack='', block=''):
         self.name = name
         self.health = health
         self.attack = attack
-
-    def print_game(self):
-        return self.name, self.health, self.attack
+        self.block = block
 
     def save(self, filename):
-        objects = {'name': self.name, 'health': self.health, 'attack': self.attack}
+        objects = {'name': self.name, 'health': self.health, 'attack': self.attack, 'block': self.block}
         with open(filename, 'w') as outfile:
             json.dump(objects, outfile)
 
@@ -21,13 +19,12 @@ class Player:
         self.name = objects['name']
         self.health = objects['health']
         self.attack = objects['attack']
+        self.block = objects['block']
 
     def attack(self, part_of_body):
-        part_of_body.legs_attack = 'нога'
-        part_of_body.dody_attack = 'корпус'
-        part_of_body.head_attack = 'голова'
+        self.attack = part_of_body
 
-
-
+    def block(self, part_of_body):
+        self.block = part_of_body
 
 
